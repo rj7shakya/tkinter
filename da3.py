@@ -26,6 +26,19 @@ for i in data:
 lb.pack()
 
 
+def onDelete():
+    data = lb.get(lb.curselection())
+    cur = connection.cursor()
+    cur.execute("DELETE FROM names WHERE name=%s", (data,))
+    connection.commit()
+    lb.delete(lb.curselection())
+
+
+delBtn = Button(m, text='Delete',
+                command=onDelete)
+delBtn.pack()
+
+
 m.geometry("500x500")
 m.title('CRUD App')
 m.mainloop()
