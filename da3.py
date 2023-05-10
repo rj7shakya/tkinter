@@ -29,7 +29,10 @@ lb.pack()
 def onDelete():
     data = lb.get(lb.curselection())
     cur = connection.cursor()
-    cur.execute("DELETE FROM names WHERE name=%s", (data,))
+    cur.execute(
+        "DELETE FROM names WHERE name=%s",
+        (data,)
+    )
     connection.commit()
     lb.delete(lb.curselection())
 
@@ -38,6 +41,24 @@ delBtn = Button(m, text='Delete',
                 command=onDelete)
 delBtn.pack()
 
+
+def add():
+    global e1
+    data = e1.get()
+    cur = connection.cursor()
+    cur.execute(
+        "INSERT INTO names (name) VALUES (%s)",
+        (data,))
+    connection.commit()
+    lb.insert(lb.size(), data)
+    entry.delete(0, 'end')
+
+
+e1 = Entry(m)
+e1.pack()
+
+addBtn = Button(m, text='Add', command=add)
+addBtn.pack()
 
 m.geometry("500x500")
 m.title('CRUD App')
