@@ -51,7 +51,7 @@ def add():
         (data,))
     connection.commit()
     lb.insert(lb.size(), data)
-    entry.delete(0, 'end')
+    e1.delete(0, 'end')
 
 
 e1 = Entry(m)
